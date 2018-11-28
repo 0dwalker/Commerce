@@ -47,15 +47,6 @@ class Bank{
 //end of Bank class
 
 
-
-
-
-
-
-
-
-
-
 class Customer{
     accountID:string;
     accountName:string;
