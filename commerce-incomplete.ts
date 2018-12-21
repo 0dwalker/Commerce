@@ -1,48 +1,55 @@
 class Bank{
-    accountID:string[];
-    accountName:string[];
-    total:number[];
-    accountPinn:string[];
-
-    constructor(aid,an,t,ap){
-        this.accountID=aid;
-        this.accountName=an;
-        this.total=t;
-        this.accountPinn=ap;
+    accountIDs:string[];
+    accountNames:string[];
+    totals:number[];
+    accountPinns:string[];
+    
+    constructor(acId,acNa,total,acPin){
+        this.accountIDs = acId;
+        this.accountNames = acNa;
+        this.totals = total;
+        this.accountPinns= acPin;
     };
 
-    verifyAccount(accountID:string):boolean {
-        if(this.accountID.indexOf(accountID)!= -1){
-            return true;
+    //a deposit
+    verifyAccount(t :Transaction):boolean {
+        for(let d=0; d<=this.accountIDs.length; d++){
+            if(t.toAccountID === this.accountIDs[d]){
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     };
 
-    verifyAccess(accountPinn:string):boolean {
-        if(this.accountPinn.indexOf(accountPinn)!= -1){
-            return true;
+    //a withdraw
+    verifyAccess(t :Transaction):boolean {
+        for(let b=0; b<=this.accountIDs.length; b++){
+            if(t.fromAccountID === this.accountIDs[b]){
+                return true;
+            }
         }
-        else{
-            return false;
-    deposit(Deposemoney:number, accountID:string, total:number){
-        if(Bank.verifyAccount == true){
-            total = Deposemoney + total;
-        }
-        else{
-            console.log("go home goof");
-        }
-    };
+        return false;
+    }; 
 
-    withdraw(withdraw:number, accountID:string, total:number){
-        if(Bank.verifyAccount == true & Bank.verifyAccess == true){
-            total = total - withdraw;
-        }
-        else{
-            console.log("go home goof ")
-        }
-    };
+    deposit(t :Transaction):void{
+        if(this.findAccountIndex(accountID) == true){
+            return this.totals = this.totals + this.amount
+        }  
+    }
+
+    withdraw(t :Transaction){
+        if(this.findAccountIndex(accountID) == true){
+            return this.totals = this.totals - this.amount
+        } 
+    }
+
+    static findAccountIndex(accountID:string):number{
+        for(let b=0; b<=this.accountIDs.length; b++){
+            if(accountID === this.accountIDs[b]){
+                return b;
+            } 
+        return -1;    
+    }
 }
 //end of Bank class
 
@@ -59,28 +66,21 @@ class Customer{
         this.total = t;
         this.accountPinn = ap;
     };
+    
 }
 //end of Customer class
 
-
-
-
-
-
-
-
-
 class Transaction{
-    FromAccountID:string
+    fromAccountID:string
     pinn:string
-    ToAccountID:string
+    toAccountID:string
     transType:string
     amount:number
 
     constructor(paid,p,taid,tt,a){
-        this.FromAccountID = paid;
+        this.fromAccountID = paid;
         this.pinn = p;
-        this.ToAccountID = taid;
+        this.toAccountID = taid;
         this.transType = tt;
         this.amount = a;
     };
@@ -118,7 +118,7 @@ function main () : void{
 let charliedata = ["12315673","charbell1231",2.37,"7133"];
 const Charlie = new Customer(...charliedata);
 
-let C = ["34659678","dillydilly",47.53,"8255"];
+let dillondata = ["34659678","dillydilly",47.53,"8255"];
 const Dillon = new Customer(...dillondata);
 
 let delanodata = ["34567655",delwalk,97.45,"8765"];

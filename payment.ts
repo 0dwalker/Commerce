@@ -3,70 +3,83 @@ interface Payment{
     payType:string;
     account:string;
     code:string;
-};
-class Card{
-    name : string;
-    number: string;
-    code : string;
-    balance : number;
-    limit :number;
-};
-class Debit extends Card{
-    
-};
-class Credit extends Card{
-    intrest: number;
+
 };
 
 
 
+abstract class Card{
+    name:string;
+    number:string;
+    pinn:string;
+    limit:number;
+    balance:number;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function point(a,b,c){
-
-
-    return {
-        x:a,
-        y:b,
-        z:c
+    constructor(na, num, pin, lim){
+        this.name=na;
+        this.number=num;
+        this.pinn=pin;
+        this.limit=lim;
+        this.balance= 0;
     };
+};
+
+
+
+class Debit extends class Card{
+
+    name: string;
+    number: string;
+    pinn: string;
+    limit: number;
+    balance: number;
+
+
+    constructor(na, num, pin, lim){
+     super(na, num, pin, lim);
+    }
+
+    pay(amount:number):Payment{
+        if(this.balance + amount < this.limit){
+            return{
+                amount:amount,
+                payType: "Debit",
+                account: this.number,
+                code: this.pinn
+            }
+        }
+    }
 }
 
-new point
-point.x
+
+class Credit extends class Card{
+
+    name: string;
+    number: string;
+    pinn: string;
+    limit: number;
+    balance: number;
+
+
+    constructor(na, num, pin, lim){
+        super(na, num, pin, lim);
+    this.intrest;
+
+    pay(amount:number):Payment{
+        if(this.balance + amount < this.limit){
+            return{
+                amount: amount,
+                payType: "Credit",
+                account: this.number,
+                code: this.pinn
+            }
+        }
+    };
+
+    intrest(){
+        if(this.balance < 0{
+            this.over = this.over * this.intrest+1;
+        }
+        return this.over;
+    };
+}
